@@ -120,8 +120,9 @@
         ' de 3/4 de la raíz cuadrada del número total de botones.
         cartasAlto = Math.Sqrt(botonesCartas.Count) * 3 / 4
         cartasAncho = Math.Ceiling(botonesCartas.Count / cartasAlto)
-        ' Redimensionamos el formulario para que quepan exatmanete todas las cartas.
+        ' Redimensionamos el formulario para que quepan exatmanete todas las cartas y lo localizamos a la mitad de la pantalla.
         Size = New Size(cartasAncho * (tamCartas.Width + 20) + 20, cartasAlto * (tamCartas.Height + 20) + 50 + btnSalir.Height + lblTiempo.Height)
+        Location = New Point((Screen.PrimaryScreen.Bounds.Width - Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - Size.Height) / 2)
         ' Acomodamos todas las cartas en el formulario reiniciando la partida.
         ReiniciarPartida()
 
@@ -160,14 +161,13 @@
                         End If
                     Next
                 Loop While repetir
+                ' Antes de posicionarla, hacemos que el botón muestre la imagen de la carta tapada y quite su borde.
+                botonesCartas(elemento).ImageIndex = 1
+                botonesCartas(elemento).FlatStyle = FlatStyle.Flat
                 botonesCartas(elemento).Location = New Point((botonesCartas(elemento).Tag Mod cartasAncho) * (tamCartas.Width + 20) + 20, (botonesCartas(elemento).Tag \ cartasAncho) * (tamCartas.Height + 20) + 30 + lblTiempo.Height)
                 ' Hacemos que el índice de navegación por el tabulador sea el mismo que si índice de
                 ' posicionamiento en el formulario para evitar trampas con el tabulador.
                 botonesCartas(elemento).TabIndex = botonesCartas(elemento).Tag
-                ' Hacemos que el botón muestre la imagen de la carta tapada y quite su borde.
-                botonesCartas(elemento).ImageIndex = 1
-                botonesCartas(elemento).FlatStyle = FlatStyle.Flat
-
             Next
         Next
     End Sub
