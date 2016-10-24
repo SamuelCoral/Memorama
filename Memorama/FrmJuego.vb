@@ -142,7 +142,7 @@
         For Y = 0 To cartasAlto - 1
             ' Para cada columna de cartas...
             ' el ciclo se detendrá si se acabaron las cartas aunque no se haya acabado la fila
-            For X = 0 To IIf(Y = cartasAlto - 1, (botonesCartas.Count Mod cartasAncho) - 1, cartasAncho - 1)
+            For X = 0 To IIf(Y = cartasAlto - 1 And botonesCartas.Count Mod cartasAncho <> 0, (botonesCartas.Count Mod cartasAncho) - 1, cartasAncho - 1)
                 ' Índice del botón que se procesa actualmente de la lista creada anteriormente.
                 Dim elemento As Integer = Y * cartasAncho + X
                 ' Ahora asignamos una posición aleatoria para cada carta y para ello
